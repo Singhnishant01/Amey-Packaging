@@ -1,0 +1,174 @@
+/* ===========================
+   PROCESS SECTION
+=========================== */
+
+.process{
+    padding:100px 0;
+    background:#fafafa;
+}
+
+/* ===========================
+   TIMELINE
+=========================== */
+
+.timeline{
+
+    max-width:900px;
+
+    margin:70px auto 0;
+
+    position:relative;
+}
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:37px;
+
+    top:0;
+
+    width:4px;
+
+    height:100%;
+
+    background:#e7d5c2;
+}
+
+/* ===========================
+   ITEM
+=========================== */
+
+.timeline-item{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:30px;
+
+    margin-bottom:50px;
+
+    position:relative;
+}
+
+/* ===========================
+   ICON
+=========================== */
+
+.timeline-icon{
+
+    width:75px;
+
+    height:75px;
+
+    border-radius:50%;
+
+    background:#9a5318;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:28px;
+
+    flex-shrink:0;
+
+    z-index:2;
+
+    box-shadow:0 10px 25px rgba(154,83,24,.3);
+
+    transition:.35s;
+}
+
+.timeline-item:hover .timeline-icon{
+
+    transform:scale(1.1) rotate(10deg);
+
+    background:#7d4313;
+}
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.timeline-content{
+
+    flex:1;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+}
+
+.timeline-item:hover .timeline-content{
+
+    transform:translateX(10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.timeline-content h3{
+
+    font-size:1.4rem;
+
+    margin-bottom:12px;
+
+    color:#222;
+}
+
+.timeline-content p{
+
+    color:#666;
+
+    line-height:1.8;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+    .process{
+
+        padding:70px 0;
+    }
+
+    .timeline::before{
+
+        left:28px;
+    }
+
+    .timeline-item{
+
+        gap:20px;
+    }
+
+    .timeline-icon{
+
+        width:56px;
+
+        height:56px;
+
+        font-size:22px;
+    }
+
+    .timeline-content{
+
+        padding:22px;
+    }
+
+}

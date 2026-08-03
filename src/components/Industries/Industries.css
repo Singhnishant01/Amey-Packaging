@@ -1,0 +1,136 @@
+/* ===========================
+   INDUSTRIES SECTION
+=========================== */
+
+.industries{
+    padding:100px 0;
+    background:#ffffff;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.industries-grid{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.industry-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s ease;
+
+    border:1px solid #f3f3f3;
+}
+
+.industry-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+/* ===========================
+   ICON
+=========================== */
+
+.industry-icon{
+
+    width:80px;
+
+    height:80px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f6e7d7;
+
+    color:#9a5318;
+
+    font-size:32px;
+
+    transition:.35s;
+}
+
+.industry-card:hover .industry-icon{
+
+    background:#9a5318;
+
+    color:#fff;
+
+    transform:rotate(12deg) scale(1.08);
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+.industry-card h3{
+
+    font-size:1.35rem;
+
+    color:#222;
+
+    margin-bottom:15px;
+}
+
+.industry-card p{
+
+    color:#666;
+
+    line-height:1.8;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+    .industries-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .industries{
+
+        padding:70px 0;
+    }
+
+    .industries-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}

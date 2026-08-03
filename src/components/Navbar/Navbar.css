@@ -1,0 +1,274 @@
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:80px;
+    z-index:1000;
+    transition:.35s ease;
+}
+
+.header.scrolled{
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   CONTAINER
+=========================== */
+
+.container{
+    width:min(1300px,92%);
+    margin:auto;
+}
+
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar{
+    height:80px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+/* ===========================
+   LOGO
+=========================== */
+
+.logo{
+    display:flex;
+    align-items:center;
+}
+
+.logo img{
+    height:65px;
+    width:auto;
+    display:block;
+}
+
+/* ===========================
+   NAV LINKS
+=========================== */
+
+.nav-links{
+    display:flex;
+    align-items:center;
+    gap:35px;
+    list-style:none;
+}
+
+.nav-links li{
+    list-style:none;
+}
+
+.nav-links a{
+    position:relative;
+    color:#2f2f2f;
+    font-size:16px;
+    font-weight:600;
+    text-decoration:none;
+    transition:.3s;
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-6px;
+
+    width:0;
+
+    height:2px;
+
+    background:#9a5318;
+
+    transition:.3s;
+}
+
+.nav-links a:hover{
+
+    color:#9a5318;
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+}
+
+/* ===========================
+   LOGIN BUTTON
+=========================== */
+
+.login-btn{
+
+    border:none;
+
+    outline:none;
+
+    padding:12px 30px;
+
+    border-radius:50px;
+
+    background:#9a5318;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.login-btn:hover{
+
+    background:#7b4212;
+
+    transform:translateY(-2px);
+}
+
+/* ===========================
+   HAMBURGER
+=========================== */
+
+.menu-btn{
+
+    display:none;
+
+    font-size:28px;
+
+    color:#9a5318;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.menu-btn:hover{
+
+    transform:rotate(90deg);
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+    .nav-links{
+
+        gap:22px;
+    }
+
+    .nav-links a{
+
+        font-size:15px;
+    }
+
+    .login-btn{
+
+        padding:10px 24px;
+    }
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+    .menu-btn{
+
+        display:block;
+        z-index:1002;
+    }
+
+    .login-btn{
+
+        display:none;
+    }
+
+    .nav-links{
+
+        position:fixed;
+
+        top:0;
+
+        right:-100%;
+
+        width:280px;
+
+        height:100vh;
+
+        background:#fff;
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        align-items:center;
+
+        gap:35px;
+
+        transition:.35s ease;
+
+        box-shadow:-10px 0 30px rgba(0,0,0,.15);
+
+        z-index:1001;
+    }
+
+    .nav-links.active{
+
+        right:0;
+    }
+
+    .nav-links a{
+
+        font-size:20px;
+    }
+
+    .logo img{
+
+        height:55px;
+    }
+}
+
+/* ===========================
+   SMALL MOBILE
+=========================== */
+
+@media(max-width:480px){
+
+    .container{
+
+        width:92%;
+    }
+
+    .nav-links{
+
+        width:240px;
+    }
+
+    .logo img{
+
+        height:50px;
+    }
+
+    .menu-btn{
+
+        font-size:26px;
+    }
+}

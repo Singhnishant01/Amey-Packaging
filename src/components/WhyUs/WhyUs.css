@@ -1,0 +1,135 @@
+/* ===========================
+   WHY CHOOSE US
+=========================== */
+
+.why-us{
+    padding:100px 0;
+    background:#fafafa;
+}
+
+/* ===========================
+   GRID
+=========================== */
+
+.why-grid{
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.why-card{
+
+    background:#fff;
+
+    padding:40px 30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s ease;
+}
+
+.why-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+/* ===========================
+   ICON
+=========================== */
+
+.why-icon{
+
+    width:75px;
+
+    height:75px;
+
+    margin:auto auto 25px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#f6e7d7;
+
+    color:#9a5318;
+
+    font-size:30px;
+
+    transition:.35s;
+}
+
+.why-card:hover .why-icon{
+
+    background:#9a5318;
+
+    color:#fff;
+
+    transform:rotate(10deg) scale(1.08);
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+.why-card h3{
+
+    font-size:1.35rem;
+
+    margin-bottom:15px;
+
+    color:#222;
+}
+
+.why-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    font-size:.98rem;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:1100px){
+
+    .why-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:768px){
+
+    .why-us{
+
+        padding:70px 0;
+    }
+
+    .why-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}

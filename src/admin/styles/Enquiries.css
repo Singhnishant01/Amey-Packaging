@@ -1,0 +1,96 @@
+.enquiries-page {
+  padding: 30px;
+}
+
+.enquiries-page h2 {
+  margin-bottom: 25px;
+}
+
+.enquiry-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.enquiry-table th,
+.enquiry-table td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.enquiry-table th {
+  background: #9a5318;
+  color: white;
+}
+
+.new-status {
+  color: green;
+  font-weight: bold;
+}
+
+.read-status {
+  color: gray;
+  font-weight: bold;
+}
+
+.view-btn,
+.read-btn,
+.delete-btn,
+.close-btn {
+  border: none;
+  padding: 8px 14px;
+  margin-right: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+}
+
+.view-btn {
+  background: #0d6efd;
+}
+
+.read-btn {
+  background: #198754;
+}
+
+.delete-btn {
+  background: #dc3545;
+}
+
+.close-btn {
+  background: #6c757d;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: white;
+  width: 550px;
+  max-width: 90%;
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.message-box {
+  background: #f5f5f5;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 10px 0 20px;
+  white-space: pre-wrap;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}

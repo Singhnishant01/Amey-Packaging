@@ -1,0 +1,194 @@
+/* ===========================
+   CONTACT
+=========================== */
+
+.contact{
+    padding:100px 0;
+    background:#ffffff;
+}
+
+/* ===========================
+   LAYOUT
+=========================== */
+
+.contact-wrapper{
+
+    margin-top:60px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1.2fr;
+
+    gap:50px;
+
+    align-items:start;
+}
+
+/* ===========================
+   CONTACT INFO
+=========================== */
+
+.contact-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+}
+
+.info-card{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    transition:.35s;
+}
+
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.12);
+}
+
+.info-card svg{
+
+    font-size:28px;
+
+    color:#9a5318;
+
+    margin-top:5px;
+}
+
+.info-card h3{
+
+    margin-bottom:8px;
+
+    color:#222;
+}
+
+.info-card p{
+
+    color:#666;
+
+    line-height:1.7;
+}
+
+/* ===========================
+   FORM
+=========================== */
+
+.contact-form{
+
+    background:#fff;
+
+    padding:40px;
+
+    border-radius:20px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+
+    width:100%;
+
+    padding:16px 18px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+
+    border-color:#9a5318;
+
+    box-shadow:0 0 0 3px rgba(154,83,24,.12);
+}
+
+.contact-form textarea{
+
+    resize:none;
+}
+
+.contact-form button{
+
+    background:#9a5318;
+
+    color:#fff;
+
+    border:none;
+
+    padding:16px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.35s;
+}
+
+.contact-form button:hover{
+
+    background:#7d4313;
+
+    transform:translateY(-3px);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:992px){
+
+    .contact-wrapper{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .contact{
+
+        padding:70px 0;
+    }
+
+    .contact-form{
+
+        padding:28px;
+    }
+
+}

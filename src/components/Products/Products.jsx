@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import "./Products.css";
 import ProductCard from "../ProductCard/ProductCard";
 
+const API_URL = "https://amey-packaging.onrender.com";
+
 function Products() {
   const [productsData, setProductsData] = useState([]);
   const [category, setCategory] = useState("All");
@@ -10,12 +12,13 @@ function Products() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch(`${API_URL}/api/products`);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
         const data = await response.json();
-
-        // Debug: Check what is coming from MongoDB
-        console.log(data);
-
         setProductsData(data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -48,7 +51,9 @@ function Products() {
       <div className="container">
         <div className="section-title" data-aos="fade-up">
           <span>Our Products</span>
+
           <h2>Premium Packaging Solutions</h2>
+
           <p>
             Explore our complete range of premium packaging products.
           </p>
@@ -57,8 +62,6 @@ function Products() {
         <div className="product-search">
           <input
             type="text"
-            name="productSearch"
-            id="productSearch"
             placeholder="Search products..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}

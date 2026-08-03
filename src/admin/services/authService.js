@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://amey-packaging.onrender.com/api/auth";
 
 export const loginAdmin = async (username, password) => {
   try {
@@ -22,7 +22,7 @@ export const loginAdmin = async (username, password) => {
 
     return data;
   } catch (error) {
-    console.error(error);
+    console.error("Login Error:", error);
 
     return {
       success: false,

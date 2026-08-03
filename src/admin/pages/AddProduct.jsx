@@ -5,6 +5,8 @@ import {
 } from "../services/productService";
 import "./Products.css";
 
+const API_URL = "https://amey-packaging.onrender.com";
+
 function AddProduct({
   refreshProducts,
   editingProduct,
@@ -40,9 +42,7 @@ function AddProduct({
 
       if (editingProduct.image) {
         if (editingProduct.image.startsWith("/uploads")) {
-          setPreview(
-            `http://localhost:5000${editingProduct.image}`
-          );
+          setPreview(`${API_URL}${editingProduct.image}`);
         } else {
           setPreview(editingProduct.image);
         }
@@ -73,7 +73,6 @@ function AddProduct({
     if (!file) return;
 
     setImage(file);
-
     setPreview(URL.createObjectURL(file));
   };
 
@@ -113,15 +112,10 @@ function AddProduct({
       }
 
       if (editingProduct) {
-        await updateProduct(
-          editingProduct._id,
-          formData
-        );
-
+        await updateProduct(editingProduct._id, formData);
         alert("✅ Product Updated Successfully");
       } else {
         await addProduct(formData);
-
         alert("✅ Product Added Successfully");
       }
 
@@ -138,7 +132,6 @@ function AddProduct({
       if (setShowAddProduct) {
         setShowAddProduct(false);
       }
-
     } catch (err) {
       console.error(err);
       alert("❌ Unable to save product");
@@ -147,13 +140,11 @@ function AddProduct({
 
   return (
     <div className="admin-products">
-
       <h2>
         {editingProduct ? "Edit Product" : "Add Product"}
       </h2>
 
       <form onSubmit={handleSubmit}>
-
         <input
           type="text"
           name="name"
@@ -239,9 +230,7 @@ function AddProduct({
             ? "Update Product"
             : "Save Product"}
         </button>
-
       </form>
-
     </div>
   );
 }

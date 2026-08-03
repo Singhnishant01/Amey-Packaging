@@ -17,7 +17,11 @@ connectDB();
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://amey-packaging.vercel.app",
+    ],
+    credentials: true,
   })
 );
 

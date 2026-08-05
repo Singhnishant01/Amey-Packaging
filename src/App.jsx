@@ -1,3 +1,4 @@
+import ProtectedRoute from "./components/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -17,10 +18,41 @@ function App() {
 
       {/* Admin */}
       <Route path="/admin/login" element={<Login />} />
-      <Route path="/admin/dashboard" element={<Dashboard />} />
-      <Route path="/admin/products" element={<Products />} />
-      <Route path="/admin/add-product" element={<AddProduct />} />
-      <Route path="/admin/enquiries" element={<Enquiries />} />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/products"
+        element={
+          <ProtectedRoute>
+            <Products />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/add-product"
+        element={
+          <ProtectedRoute>
+            <AddProduct />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/enquiries"
+        element={
+          <ProtectedRoute>
+            <Enquiries />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

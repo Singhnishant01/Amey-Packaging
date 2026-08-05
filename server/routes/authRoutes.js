@@ -1,53 +1,29 @@
 const express = require("express");
-const bcrypt = require("bcryptjs");
-
 const router = express.Router();
 
-const Admin = require("../models/Admin");
-const { login } = require("../controllers/authController");
+const protect = require("../middleware/authMiddleware");
 
-// =========================
-// TEMP: Create Admin
-// =========================
-router.get("/create-admin", async (req, res) => {
-  try {
-    const existingAdmin = await Admin.findOne({
-      username: "admin",
-    });
+const {
+  login,
+  getProfile,
+  changeUsername,
+  changePassword,
+} = require("../controllers/authController");
 
-    if (existingAdmin) {
-      return res.json({
-        success: true,
-        message: "Admin already exists",
-      });
-    }
+// ================= PUBLIC =================
 
-    const hashedPassword = await bcrypt.hash("admin123", 10);
-
-    await Admin.create({
-      username: "admin",
-      password: hashedPassword,
-    });
-
-    res.json({
-      success: true,
-      message: "Admin created successfully",
-      username: "admin",
-      password: "admin123",
-    });
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      success: false,
-      message: "Server Error",
-    });
-  }
-});
-
-// =========================
 // Login
-// =========================
 router.post("/login", login);
+
+// ================= PROTECTED =================
+
+// Get Admin Profile
+router.get("/profile", protect, getProfile);
+
+// Change Username
+router.put("/change-username", protect, changeUsername);
+
+// Change Password
+router.put("/change-password", protect, changePassword);
 
 module.exports = router;

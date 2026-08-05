@@ -1,8 +1,8 @@
-const API_URL = "https://amey-packaging.onrender.com/api/auth";
+import { API } from "../../config/api";
 
 export const loginAdmin = async (username, password) => {
   try {
-    const response = await fetch(`${API_URL}/login`, {
+    const response = await fetch(API.AUTH.LOGIN, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,6 +40,11 @@ export const getToken = () => {
   return localStorage.getItem("token");
 };
 
+export const getAdmin = () => {
+  const admin = localStorage.getItem("admin");
+  return admin ? JSON.parse(admin) : null;
+};
+
 export const isLoggedIn = () => {
-  return !!localStorage.getItem("token");
+  return !!getToken();
 };

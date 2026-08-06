@@ -5,12 +5,17 @@ const Product = require("../models/Product");
 const protect = require("../middleware/authMiddleware");
 const upload = require("../middleware/upload");
 
-// GET All Products (Public)
+// =======================
+// GET ALL PRODUCTS
+// =======================
+
 router.get("/", async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: "Server Error",
@@ -18,7 +23,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET Single Product (Public)
+// =======================
+// GET SINGLE PRODUCT
+// =======================
+
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -32,6 +40,8 @@ router.get("/:id", async (req, res) => {
 
     res.json(product);
   } catch (error) {
+    console.error(error);
+
     res.status(500).json({
       success: false,
       message: "Server Error",
@@ -39,7 +49,10 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// ADD Product
+// =======================
+// ADD PRODUCT
+// =======================
+
 router.post(
   "/",
   protect,
@@ -54,17 +67,18 @@ router.post(
         applications,
       } = req.body;
 
-      const image = req.file
-        ? `/uploads/${req.file.filename}`
-        : "";
+      // Cloudinary URL
+      const image = req.file ? req.file.path : "";
 
       const product = await Product.create({
         name,
         category,
         image,
         description,
-        features: JSON.parse(features),
-        applications: JSON.parse(applications),
+        features: features ? JSON.parse(features) : [],
+        applications: applications
+          ? JSON.parse(applications)
+          : [],
       });
 
       res.status(201).json({
@@ -83,7 +97,10 @@ router.post(
   }
 );
 
-// UPDATE Product
+// =======================
+// UPDATE PRODUCT
+// =======================
+
 router.put(
   "/:id",
   protect,
@@ -94,8 +111,9 @@ router.put(
         ...req.body,
       };
 
+      // Cloudinary URL
       if (req.file) {
-        updateData.image = `/uploads/${req.file.filename}`;
+        updateData.image = req.file.path;
       }
 
       if (req.body.features) {
@@ -140,10 +158,15 @@ router.put(
   }
 );
 
-// DELETE Product
+// =======================
+// DELETE PRODUCT
+// =======================
+
 router.delete("/:id", protect, async (req, res) => {
   try {
-    const product = await Product.findByIdAndDelete(req.params.id);
+    const product = await Product.findByIdAndDelete(
+      req.params.id
+    );
 
     if (!product) {
       return res.status(404).json({

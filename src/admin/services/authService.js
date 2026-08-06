@@ -1,8 +1,8 @@
-import { API } from "../../config/api";
+const API_URL = `${import.meta.env.VITE_API_URL}/auth`;
 
 export const loginAdmin = async (username, password) => {
   try {
-    const response = await fetch(API.AUTH.LOGIN, {
+    const response = await fetch(`${API_URL}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export const loginAdmin = async (username, password) => {
 
     return data;
   } catch (error) {
-    console.error("Login Error:", error);
+    console.error(error);
 
     return {
       success: false,
@@ -42,9 +42,10 @@ export const getToken = () => {
 
 export const getAdmin = () => {
   const admin = localStorage.getItem("admin");
+
   return admin ? JSON.parse(admin) : null;
 };
 
 export const isLoggedIn = () => {
-  return !!getToken();
+  return !!localStorage.getItem("token");
 };

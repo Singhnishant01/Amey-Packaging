@@ -10,17 +10,25 @@ const authHeader = () => ({
   },
 });
 
+// =====================
+// GET ALL PRODUCTS
+// =====================
 export const getProducts = async () => {
   const res = await axios.get(API);
   return res.data;
 };
 
+// =====================
+// GET SINGLE PRODUCT
+// =====================
 export const getProduct = async (id) => {
   const res = await axios.get(`${API}/${id}`);
   return res.data;
 };
 
+// =====================
 // ADD PRODUCT
+// =====================
 export const addProduct = async (formData) => {
   const res = await axios.post(API, formData, {
     headers: {
@@ -32,7 +40,9 @@ export const addProduct = async (formData) => {
   return res.data;
 };
 
+// =====================
 // UPDATE PRODUCT
+// =====================
 export const updateProduct = async (id, formData) => {
   const res = await axios.put(`${API}/${id}`, formData, {
     headers: {
@@ -44,9 +54,14 @@ export const updateProduct = async (id, formData) => {
   return res.data;
 };
 
+// =====================
 // DELETE PRODUCT
+// =====================
 export const deleteProduct = async (id) => {
-  const res = await axios.delete(`${API}/${id}`, authHeader());
+  const res = await axios.delete(
+    `${API}/${id}`,
+    authHeader()
+  );
 
   return res.data;
 };

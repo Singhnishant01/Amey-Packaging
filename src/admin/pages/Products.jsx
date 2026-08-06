@@ -1,117 +1,185 @@
-import "./Products.css";
-import { deleteProduct } from "../services/productService";
+import { useEffect, useMemo, useState } from "react";
+import Sidebar from "../components/Sidebar";
+import SearchBar from "../components/SearchBar";
+import ProductTable from "../components/ProductTable";
+import Pagination from "../components/Pagination";
+import ProductModal from "../components/ProductModal";
 
-function Products({
-  products,
-  refreshProducts,
-  setEditingProduct,
-  setShowAddProduct,
-}) {
-  const handleDelete = async (id) => {
-    if (!window.confirm("Delete this product?")) return;
+import {
+    getProducts,
+    deleteProduct,
+} from "../services/productService";
 
-    try {
-      await deleteProduct(id);
-      await refreshProducts();
-    } catch (err) {
-      console.error(err);
-      alert("Unable to delete product");
-    }
-  };
+import "../styles/products.css";
 
-  // Generate correct image URL
-  const getImageUrl = (image) => {
-    if (!image) return "";
+function Products() {
+    console.count("Products Render");
+    const [products, setProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const BASE_URL = import.meta.env.VITE_API_URL.replace("/api", "");
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState("All");
 
-    // Uploaded images from backend
-    if (image.startsWith("/uploads")) {
-      return `${BASE_URL}${image}`;
-    }
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 8;
 
-    // Already full URL
-    if (image.startsWith("http")) {
-      return image;
-    }
+    const [showModal, setShowModal] = useState(false);
+    const [editingProduct, setEditingProduct] = useState(null);
 
-    // Images stored in React public folder
-    return image;
-  };
+    useEffect(() => {
+        loadProducts();
+    }, []);
 
-  return (
-    <div className="admin-products">
-      <table>
-        <thead>
-          <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
+    const loadProducts = async () => {
+        try {
+            setLoading(true);
 
-        <tbody>
-          {products.length === 0 ? (
-            <tr>
-              <td
-                colSpan="4"
-                style={{
-                  textAlign: "center",
-                  padding: "30px",
-                }}
-              >
-                No Products Found
-              </td>
-            </tr>
-          ) : (
-            products.map((product) => (
-              <tr key={product._id}>
-                <td>
-                  <img
-                    src={getImageUrl(product.image)}
-                    alt={product.name}
-                    style={{
-                      width: "70px",
-                      height: "70px",
-                      objectFit: "cover",
-                      borderRadius: "8px",
+            const data = await getProducts();
+
+            setProducts(Array.isArray(data) ? data : []);
+        } catch (err) {
+            console.error(err);
+            alert("Unable to load products.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm("Delete this product?")) return;
+
+        try {
+            await deleteProduct(id);
+            await loadProducts();
+        } catch (err) {
+            console.error(err);
+            alert("Unable to delete product.");
+        }
+    };
+
+    const BASE_URL = import.meta.env.VITE_API_URL.replace(
+        "/api",
+        ""
+    );
+
+    const getImage = (image) => {
+        if (!image) return "/placeholder.png";
+
+        if (image.startsWith("http")) {
+            return image;
+        }
+
+        if (image.startsWith("/uploads")) {
+            return `${BASE_URL}${image}`;
+        }
+
+        return image;
+    };
+
+    const categories = useMemo(() => {
+        return [
+            "All",
+            ...new Set(products.map((p) => p.category)),
+        ];
+    }, [products]);
+
+    const filteredProducts = useMemo(() => {
+        return products.filter((product) => {
+            const matchSearch =
+                product.name
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                product.category
+                    .toLowerCase()
+                    .includes(search.toLowerCase());
+
+            const matchCategory =
+                category === "All" ||
+                product.category === category;
+
+            return matchSearch && matchCategory;
+        });
+    }, [products, search, category]);
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search, category]);
+
+    const totalPages = Math.ceil(
+        filteredProducts.length / productsPerPage
+    );
+
+    const currentProducts = useMemo(() => {
+        const start =
+            (currentPage - 1) * productsPerPage;
+
+        return filteredProducts.slice(
+            start,
+            start + productsPerPage
+        );
+    }, [filteredProducts, currentPage]);
+
+    // ============================
+    // PART 2 STARTS FROM HERE
+    // ============================
+
+    return (
+        <div className="products-page">
+            <Sidebar />
+
+            <div className="products-content">
+                <h1>📦 Products</h1>
+
+                <SearchBar
+                    search={search}
+                    setSearch={setSearch}
+                    category={category}
+                    setCategory={setCategory}
+                    categories={categories}
+                    onAddProduct={() => {
+                        setEditingProduct(null);
+                        setShowModal(true);
                     }}
-                    onError={(e) => {
-                      e.target.src = "/placeholder.png";
+                />
+
+                {loading ? (
+                    <h2>Loading Products...</h2>
+                ) : (
+                    <>
+                        <ProductTable
+                            products={currentProducts}
+                            getImage={getImage}
+                            onEdit={(product) => {
+                                setEditingProduct(product);
+                                setShowModal(true);
+                            }}
+                            onDelete={handleDelete}
+                        />
+
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            setCurrentPage={setCurrentPage}
+                        />
+                    </>
+                )}
+
+                <ProductModal
+                    open={showModal}
+                    onClose={() => {
+                        setShowModal(false);
+                        setEditingProduct(null);
                     }}
-                  />
-                </td>
-
-                <td>{product.name}</td>
-
-                <td>{product.category}</td>
-
-                <td>
-                  <button
-                    className="edit-btn"
-                    onClick={() => {
-                      setEditingProduct(product);
-                      setShowAddProduct(true);
+                    editingProduct={editingProduct}
+                    onSuccess={() => {
+                        setShowModal(false);
+                        setEditingProduct(null);
+                        loadProducts();
                     }}
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(product._id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-    </div>
-  );
+                />
+            </div>
+        </div>
+    );
 }
 
 export default Products;

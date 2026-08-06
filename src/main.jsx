@@ -22,10 +22,17 @@ AOS.init({
 
 AOS.refresh();
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+{/*ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </React.StrictMode>
+); */}
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 );
+

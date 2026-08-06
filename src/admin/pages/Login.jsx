@@ -1,76 +1,162 @@
-import { useState } from "react";
-import { loginAdmin } from "../services/authService";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginAdmin, isLoggedIn } from "../services/authService";
 
 function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  // Redirect if already logged in
+  useEffect(() => {
+    if (isLoggedIn()) {
+      navigate("/admin/dashboard", { replace: true });
+    }
+  }, [navigate]);
+
+  const [form, setForm] = useState({
+    username: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setForm((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+
+    if (error) {
+      setError("");
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const result = await loginAdmin(username, password);
+    if (!form.username.trim() || !form.password.trim()) {
+      setError("Please enter username and password.");
+      return;
+    }
 
-    if (result.success) {
-      setMessage("✅ Login Successful");
-      window.location.href = "/admin/dashboard";
-    } else {
-      setMessage(result.message);
+    try {
+      setLoading(true);
+
+      const data = await loginAdmin(
+        form.username,
+        form.password
+      );
+
+      if (data.success) {
+        navigate("/admin/dashboard", { replace: true });
+      } else {
+        setError(data.message || "Invalid credentials.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Unable to login.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div
       style={{
-        maxWidth: "400px",
-        margin: "100px auto",
-        padding: "30px",
-        border: "1px solid #ddd",
-        borderRadius: "10px",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "#f5f5f5",
       }}
     >
-      <h2>Admin Login</h2>
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          width: "420px",
+          background: "#fff",
+          padding: "40px",
+          borderRadius: "15px",
+          boxShadow: "0 10px 30px rgba(0,0,0,.08)",
+        }}
+      >
+        <h1
+          style={{
+            textAlign: "center",
+            marginBottom: "30px",
+          }}
+        >
+          Admin Login
+        </h1>
 
-      <form onSubmit={handleLogin}>
         <input
           type="text"
+          name="username"
           placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "15px",
-          }}
+          value={form.username}
+          onChange={handleChange}
+          style={inputStyle}
+          autoComplete="username"
         />
 
         <input
           type="password"
+          name="password"
           placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "15px",
-          }}
+          value={form.password}
+          onChange={handleChange}
+          style={inputStyle}
+          autoComplete="current-password"
         />
+
+        {error && (
+          <p
+            style={{
+              color: "#dc2626",
+              marginBottom: "15px",
+              fontWeight: "500",
+            }}
+          >
+            {error}
+          </p>
+        )}
 
         <button
           type="submit"
+          disabled={loading}
           style={{
-            width: "100%",
-            padding: "12px",
-            cursor: "pointer",
+            ...buttonStyle,
+            opacity: loading ? 0.7 : 1,
+            cursor: loading ? "not-allowed" : "pointer",
           }}
         >
-          Login
+          {loading ? "Logging In..." : "Login"}
         </button>
       </form>
-
-      <p>{message}</p>
     </div>
   );
 }
+
+const inputStyle = {
+  width: "100%",
+  padding: "14px",
+  marginBottom: "18px",
+  borderRadius: "10px",
+  border: "1px solid #ddd",
+  fontSize: "15px",
+  boxSizing: "border-box",
+  outline: "none",
+};
+
+const buttonStyle = {
+  width: "100%",
+  padding: "14px",
+  background: "#9a5318",
+  color: "#fff",
+  border: "none",
+  borderRadius: "10px",
+  fontSize: "16px",
+  fontWeight: "600",
+};
 
 export default Login;

@@ -4,13 +4,17 @@ const API = `${import.meta.env.VITE_API_URL}/enquiries`;
 
 const getToken = () => localStorage.getItem("token");
 
-// Public - Send enquiry
+// =========================
+// USER - SEND ENQUIRY
+// =========================
 export const sendEnquiry = async (data) => {
   const res = await axios.post(API, data);
   return res.data;
 };
 
-// Admin - Get enquiries
+// =========================
+// ADMIN - GET ENQUIRIES
+// =========================
 export const getEnquiries = async () => {
   const res = await axios.get(API, {
     headers: {
@@ -21,7 +25,9 @@ export const getEnquiries = async () => {
   return res.data;
 };
 
-// Admin - Mark as Read
+// =========================
+// MARK AS READ
+// =========================
 export const markAsRead = async (id) => {
   const res = await axios.put(
     `${API}/${id}`,
@@ -36,7 +42,9 @@ export const markAsRead = async (id) => {
   return res.data;
 };
 
-// Admin - Delete
+// =========================
+// DELETE ENQUIRY
+// =========================
 export const deleteEnquiry = async (id) => {
   const res = await axios.delete(`${API}/${id}`, {
     headers: {

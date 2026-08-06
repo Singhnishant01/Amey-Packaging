@@ -1,0 +1,138 @@
+/* ===========================
+   PAGE
+=========================== */
+
+.products-page {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.products-content {
+  flex: 1;
+  padding: 35px;
+}
+
+/* ===========================
+   TABLE
+=========================== */
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.product-table thead {
+  background: #f5f5f5;
+}
+
+.product-table th,
+.product-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.product-table img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.primary-btn {
+  background: #9a5318;
+  color: white;
+  border: none;
+  padding: 11px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.primary-btn:hover{
+  background:#7d4314;
+}
+
+.edit-btn{
+  background:#2563eb;
+  color:white;
+  border:none;
+  padding:8px 15px;
+  border-radius:6px;
+  cursor:pointer;
+  margin-right:10px;
+}
+
+.delete-btn{
+  background:#dc2626;
+  color:white;
+  border:none;
+  padding:8px 15px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* ===========================
+   SEARCH BAR
+=========================== */
+
+.search-wrapper{
+  display:flex;
+  gap:15px;
+  margin:25px 0;
+  flex-wrap:wrap;
+}
+
+.search-wrapper input{
+  flex:1;
+  min-width:260px;
+  padding:12px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+.search-wrapper select{
+  width:220px;
+  padding:12px;
+  border-radius:8px;
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+.table-card{
+  background:white;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+/* ===========================
+   PAGINATION
+=========================== */
+
+.pagination{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:30px;
+}
+
+.pagination button{
+  padding:10px 16px;
+  border:none;
+  cursor:pointer;
+  border-radius:8px;
+}
+
+.pagination .active{
+  background:#9a5318;
+  color:white;
+}

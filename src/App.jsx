@@ -1,14 +1,13 @@
-import ProtectedRoute from "./components/ProtectedRoute";
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 
-// Admin Pages
+// Admin
 import Login from "./admin/pages/Login";
 import Dashboard from "./admin/pages/Dashboard";
 import Products from "./admin/pages/Products";
-import AddProduct from "./admin/pages/AddProduct";
-import Enquiries from "./admin/pages/Enquiries";
+
+import ProtectedRoute from "./admin/components/ProtectedRoute";
 
 function App() {
   return (
@@ -18,6 +17,7 @@ function App() {
 
       {/* Admin */}
       <Route path="/admin/login" element={<Login />} />
+
       <Route
         path="/admin/dashboard"
         element={
@@ -32,24 +32,6 @@ function App() {
         element={
           <ProtectedRoute>
             <Products />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/admin/add-product"
-        element={
-          <ProtectedRoute>
-            <AddProduct />
-          </ProtectedRoute>
-        }
-      />
-
-      <Route
-        path="/admin/enquiries"
-        element={
-          <ProtectedRoute>
-            <Enquiries />
           </ProtectedRoute>
         }
       />

@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
+import ProductDetails from "./pages/ProductDetails";
+
 
 // Admin
 import Login from "./admin/pages/Login";
@@ -17,6 +19,12 @@ function App() {
     <Routes>
       {/* Website */}
       <Route path="/" element={<Home />} />
+
+      {/* Products_details*/}
+      <Route
+        path="/products/:id"
+        element={<ProductDetails />}
+      />
 
       {/* Admin */}
       <Route path="/admin/login" element={<Login />} />

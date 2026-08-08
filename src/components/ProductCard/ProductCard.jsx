@@ -26,7 +26,7 @@ function ProductCard({ product }) {
         <div className="product-buttons">
 
           <Link
-            to={`/products/${product.id}`}
+            to={`/products/${product._id}`}
             className="details-btn"
           >
             View Details

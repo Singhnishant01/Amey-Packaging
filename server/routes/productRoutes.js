@@ -62,6 +62,7 @@ router.post(
       const {
         name,
         category,
+        price,
         description,
         features,
         applications,
@@ -73,6 +74,7 @@ router.post(
       const product = await Product.create({
         name,
         category,
+        price,
         image,
         description,
         features: features ? JSON.parse(features) : [],

@@ -9,6 +9,7 @@ import {
 } from "react-icons/fa";
 
 import { sendEnquiry } from "../../admin/services/enquiryService";
+
 function Contact() {
   const [form, setForm] = useState({
     name: "",
@@ -80,38 +81,56 @@ function Contact() {
 
           <div className="contact-info">
 
+            {/* Address */}
             <div className="info-card">
               <FaMapMarkerAlt />
 
               <div>
                 <h3>Address</h3>
-                <p>Chaibasa, Jharkhand, India</p>
+
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=Jwalanagar%20Meerut"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p>Jwalanagar, Meerut</p>
+                </a>
               </div>
             </div>
 
+            {/* Phone */}
             <div className="info-card">
               <FaPhoneAlt />
 
               <div>
                 <h3>Phone</h3>
-                <p>+91 7970527373</p>
+
+                <a href="tel:+919217445379">
+                  <p>+91 9217445379</p>
+                </a>
               </div>
             </div>
 
+            {/* Email */}
             <div className="info-card">
               <FaEnvelope />
 
               <div>
                 <h3>Email</h3>
-                <p>info@ameypackaging.com</p>
+
+                <a href="mailto:Ameypackaging80@gmail.com">
+                  <p>Ameypackaging80@gmail.com</p>
+                </a>
               </div>
             </div>
 
+            {/* Working Hours */}
             <div className="info-card">
               <FaClock />
 
               <div>
                 <h3>Working Hours</h3>
+
                 <p>Mon – Sat | 9:00 AM – 7:00 PM</p>
               </div>
             </div>

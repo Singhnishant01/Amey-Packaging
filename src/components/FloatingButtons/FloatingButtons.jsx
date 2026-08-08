@@ -25,7 +25,7 @@ function FloatingButtons() {
   return (
     <>
       <a
-        href="https://wa.me/+917970527373"
+        href="https://wa.me/+919217445379"
         target="_blank"
         rel="noreferrer"
         className="whatsapp-btn"

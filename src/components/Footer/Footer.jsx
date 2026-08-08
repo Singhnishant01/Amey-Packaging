@@ -5,21 +5,19 @@ import {
   FaInstagram,
   FaLinkedinIn,
   FaWhatsapp,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
 } from "react-icons/fa";
 
 function Footer() {
   return (
     <footer className="footer">
-
       <div className="container">
-
-        <div className="footer-grid"
-          data-aos="fade-up">
+        <div className="footer-grid" data-aos="fade-up">
 
           {/* Company */}
-
           <div className="footer-column">
-
             <h2>Amey Packaging</h2>
 
             <p>
@@ -29,77 +27,101 @@ function Footer() {
 
             <div className="social-icons">
 
-              <a href="#">
+              <a
+                href="https://www.facebook.com/share/17SeFnr82r/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+              >
                 <FaFacebookF />
               </a>
 
-              <a href="#">
+              <a
+                href="https://www.instagram.com/ameypackaging?igsh=cjl4NmF3azdoZjlt"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
                 <FaInstagram />
               </a>
 
-              <a href="#">
+              <a
+                href="#"
+                aria-label="LinkedIn"
+              >
                 <FaLinkedinIn />
               </a>
 
-              <a href="#">
+              <a
+                href="https://wa.me/919217445379"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+              >
                 <FaWhatsapp />
               </a>
 
             </div>
-
           </div>
 
           {/* Links */}
-
           <div className="footer-column">
-
             <h3>Quick Links</h3>
 
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#products">Products</a>
             <a href="#contact">Contact</a>
-
           </div>
 
           {/* Products */}
-
           <div className="footer-column">
-
             <h3>Products</h3>
 
-            <a href="#">Non Woven Bags</a>
-            <a href="#">Garment Covers</a>
-            <a href="#">BOPP Bags</a>
-            <a href="#">Customized Bags</a>
-
+            <a href="#products">Non Woven Bags</a>
+            <a href="#products">Garment Covers</a>
+            <a href="#products">BOPP Bags</a>
+            <a href="#products">Customized Bags</a>
           </div>
 
           {/* Contact */}
-
           <div className="footer-column">
-
             <h3>Contact</h3>
 
-            <p>Chaibasa, Jharkhand</p>
+            <a
+              href="tel:+919217445379"
+              className="contact-link"
+            >
+              <FaPhone />
+              <span>+91 9217445379</span>
+            </a>
 
-            <p>+91 XXXXX XXXXX</p>
+            <a
+              href="mailto:Ameypackaging80@gmail.com"
+              className="contact-link"
+            >
+              <FaEnvelope />
+              <span>Ameypackaging80@gmail.com</span>
+            </a>
 
-            <p>info@ameypackaging.com</p>
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=Jwalanagar%20Meerut"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-link"
+            >
+              <FaMapMarkerAlt />
+              <span>Jwalanagar, Meerut</span>
+            </a>
 
           </div>
-
         </div>
 
         <div className="footer-bottom">
-
           © {new Date().getFullYear()} Amey Packaging.
           All Rights Reserved.
-
         </div>
-
       </div>
-
     </footer>
   );
 }

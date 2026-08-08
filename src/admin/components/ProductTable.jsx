@@ -36,11 +36,13 @@ function ProductTable({
             products.map((product) => (
               <tr key={product._id}>
                 <td>
-                  <div
+                  <img
+                    src={product.image}
+                    alt={product.name}
                     style={{
                       width: 70,
                       height: 70,
-                      background: "#ddd",
+                      objectFit: "cover",
                       borderRadius: 8,
                     }}
                   />
